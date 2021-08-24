@@ -1,0 +1,84 @@
+{
+	"info": {
+		"_postman_id": "0da95a3d-9309-4026-bc17-8153cca60040",
+		"name": "Monitoring&Profiling",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Counter - Random Name",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var names = [\"Victor\", \"Carlos\", \"Julio\", \"Maria Jose\", \"Raquel\", \"Vladi\", \"Omar\", \"Jazmin\", \"Liliana\"];",
+							"var random = Math.floor(Math.random() * 9);",
+							"",
+							"pm.environment.set(\"random_name\", names[random]);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/monitoring/counter/{{random_name}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"monitoring",
+						"counter",
+						"{{random_name}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Gauge - Add Element",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/monitoring/gauge",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"monitoring",
+						"gauge"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Gauge - Remove Element",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/monitoring/gauge",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"monitoring",
+						"gauge"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

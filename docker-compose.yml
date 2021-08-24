@@ -1,0 +1,32 @@
+version: "2.4"
+
+services:
+
+  monitoring-and-profiling:
+    image: bolivianjug/monitoring-and-profiling
+    hostname: monitoring-and-profiling
+    ports:
+      - 8080:8080
+
+  prometheus:
+    image: prom/prometheus:latest
+    hostname: prometheus
+    user: root
+    ports:
+      - 9090:9090
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --web.enable-lifecycle
+      - --storage.tsdb.retention.size=512MB
+    volumes:
+      - ./prometheus/data:/prometheus
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+
+  grafana:
+    image: grafana/grafana:latest
+    hostname: grafana
+    user: root
+    ports:
+      - 3000:3000
+    volumes:
+      - ./grafana:/var/lib/grafana/
